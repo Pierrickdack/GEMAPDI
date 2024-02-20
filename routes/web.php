@@ -19,6 +19,6 @@ Route::get('/Accueil', function () {
 
 Route::post('/register', [UserController::class, 'register'])->name('register');
 
-Route::post('/Accueill', [UserController::class, 'login'])->name('login');
+Route::post('/Accueil', [UserController::class, 'login'])->name('login');
 
 Route::post('/Deconnexion', [UserController::class, 'logout'])->name('logout');

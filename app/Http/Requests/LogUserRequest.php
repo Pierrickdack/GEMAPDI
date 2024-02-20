@@ -13,8 +13,7 @@ class LogUserRequest extends FormRequest
     public function rules(): array {
 
         return [
-            'family_name' => 'required|string',
-            'surname' => 'required|string',
+            'username' => 'required|string',
             'email' => 'required|email|max:255',
             'password' => 'required|string',
         ];

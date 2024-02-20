@@ -11,8 +11,16 @@
                             <h4>Login</h4>
                         </div>
                         <div class="card-body">
+
                             <form action="{{ route('login') }}" method="POST" class="needs-validation" novalidate="">
                                 @csrf
+                                <div class="form-group">
+                                    <label for="username">Username</label>
+                                    <input id="username" type="text" class="form-control" name="username" tabindex="2" required autofocus>
+                                    <div class="invalid-feedback">
+                                        Please fill in your username
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <label for="email">Email</label>
                                     <input id="email" type="email" class="form-control" name="email" tabindex="2" required autofocus>
@@ -41,9 +49,9 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="submit" class="btn btn-primary btn-lg btn-block" value="Se Connecter" tabindex="5">
-                                        {{-- Login
-                                    </button> --}}
+                                    <button type="submit" class="btn btn-primary btn-lg btn-block" value="Se Connecter" tabindex="5">
+                                        Login
+                                    </button>
                                 </div>
                             </form>
                         </div>

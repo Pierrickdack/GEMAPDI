@@ -13,21 +13,14 @@
 						<div class="card-body">
 							<form action="{{ route('register') }}" method="POST">
                                 @csrf
-								<div class="row">
-									<div class="form-group col-6">
-										<label for="family_name">Family Name</label>
-										<input id="family_name" type="text" class="form-control" name="family_name" autofocus>
-									</div>
-									<div class="form-group col-6">
-										<label for="surname">Surname</label>
-										<input id="surname" type="text" class="form-control" name="surname">
-									</div>
+								<div class="form-group">
+									<label for="username">Username</label>
+									<input id="username" type="text" class="form-control" name="username">
 								</div>
 								<div class="form-group">
 									<label for="email">Email</label>
 									<input id="email" type="email" class="form-control" name="email">
-									<div class="invalid-feedback">
-									</div>
+									<div class="invalid-feedback"></div>
 								</div>
 								<div class="row">
 									<div class="form-group col-6">

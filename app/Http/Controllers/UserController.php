@@ -9,6 +9,8 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\LogUserRequest;
 
+
+
 class UserController extends Controller
 {
     public function register(LogUserRequest $request) {
@@ -19,19 +21,20 @@ class UserController extends Controller
         $emailExiste = Utilisateur::where('email', $data['email'])->exists();
 
         if ($emailExiste) {
-            return redirect()->route('inscription')->with('error', 'L\'email existe déjà.');
+            toastr()->error('L\'email existe déjà.');
+
+            return redirect()->route('inscription');
         }
 
         $user = new Utilisateur();
-        $user->family_name = $data['family_name'];
-        $user->surname = $data['surname'];
+        $user->username = $data['username'];
         $user->email = $data['email'];
         $user->password = Hash::make($data['password']);
         
         $user->save();
+        toastr()->success("Compte créé avec succès !");
 
-        // Rediriger l'utilisateur vers une page de confirmation ou une autre page appropriée
-        return redirect()->route('connexion')->with('success', 'Votre compte a été créé avec succès!');
+        return redirect()->route('connexion');
     }
 
     public function login(LogUserRequest $request) {
@@ -42,17 +45,20 @@ class UserController extends Controller
 
         if ($admin && Hash::check($data['password'], $admin->password)) {
             $request->session()->regenerate();
-            //toastr()->success("Connexion réussie !");
+            
+            toastr()->success("Connexion réussie !");
 
+            $username = $admin->username;
 
-            return redirect()->route('dashboard');
+            return redirect()->route('dashboard')->with('username', $username);
+
         }
 
-        //toastr()->error('Identifiants invalides !!');
+        toastr()->error('Identifiants invalides !!');
         return back()->withInput()->withErrors(['email' => 'Identifiants invalides']);
     }
 
-    public function logout(Request $request) {
+    public function logout(LogUserRequest $request) {
 
         $request->session()->invalidate(); // Invalider la session actuelle
         $request->session()->regenerateToken(); // Régénérer le jeton de session
